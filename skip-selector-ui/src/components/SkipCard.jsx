@@ -1,38 +1,42 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 // SkipCard component to display individual skip details
 const SkipCard = ({ skip }) => {
   const finalPrice = (skip.price_before_vat * (1 + skip.vat / 100)).toFixed(0);
-
+  
   // Construct the image URL based on the skip size
   const imageUrl = `https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/${skip.size}-yarder-skip.jpg`;
 
   return (
-    <div className="group relative rounded-lg border-2 p-4 md:p-6 transition-all border-[#2A2A2A] hover:border-[#0037C1]/50 bg-[#1C1C1C] text-white cursor-pointer">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-100 dark:bg-[#1F2937] rounded-xl overflow-hidden shadow hover:shadow-xl transition"
+    >
       <div className="relative">
-        <img
-          src={imageUrl}
-          alt={`${skip.size} Yard Skip`}
-          className="w-full h-36 md:h-48 object-cover rounded-md mb-4"
-        />
-        <div className="absolute top-3 right-2 z-20 bg-[#0037C1] text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+        <img src={imageUrl} alt={`${skip.size} Yard Skip`} className="w-full h-48 object-cover" />
+        <div className="absolute top-3 left-3 bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
           {skip.size} Yards
         </div>
         {!skip.allowed_on_road && (
-          <div className="absolute bottom-3 left-2 z-20 bg-black/90 backdrop-blur-sm px-3 py-1.5 rounded-lg flex items-center gap-2">
-            <span className="text-xs font-medium text-yellow-500">Not Allowed On The Road</span>
+          <div className="absolute bottom-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded">
+            Not Allowed On Road
           </div>
         )}
       </div>
-      <h3 className="text-lg md:text-xl font-bold mb-2">{skip.size} Yard Skip</h3>
-      <p className="text-sm text-gray-400 mb-4 md:mb-6">{skip.hire_period_days} day hire period</p>
-      <div className="flex justify-between items-center mb-4">
-        <span className="text-xl md:text-2xl font-bold text-[#0037C1]">£{finalPrice}</span>
+      <div className="p-5">
+        <h2 className="text-lg font-bold mb-1">{skip.size} Yard Skip</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{skip.hire_period_days} day hire</p>
+        <div className="flex justify-between items-center">
+          <span className="text-xl font-semibold text-blue-600 dark:text-blue-400">£{finalPrice}</span>
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            Select
+          </button>
+        </div>
       </div>
-      <button className="w-full py-2.5 md:py-3 px-4 rounded-md transition-all flex items-center justify-center space-x-2 bg-[#2A2A2A] text-white hover:bg-[#3A3A3A] hover:border-[#0037C1]">
-        <span>Select This Skip</span>
-      </button>
-    </div>
+    </motion.div>
   );
 };
 

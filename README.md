@@ -56,3 +56,14 @@ skip-selector-ui/
 ## Notes
 
 All images are loaded dynamically based on the skip size to avoid hardcoding URLs.
+
+---
+
+## Changelog
+
+### v1.1 – Modern UI & Feature Enhancements
+- Added **search bar** to filter skips by yard size.
+- Implemented **"scroll to top"** button on scroll.
+- Integrated **Framer Motion** for animated UI elements.
+- Introduced **dark/light mode** (light as default).
+- Improved **responsiveness** and cleaned component structure.
