@@ -1,4 +1,3 @@
-// src/constants/steps.js
 import {
     MapPin,
     Trash2,

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { steps } from '@/constants/steps';
+import { ChevronDown } from 'lucide-react';
 
 const cx = (...classes) => classes.filter(Boolean).join(' ');
 
@@ -14,7 +15,7 @@ const ProgressNavigator = ({ activeStep, setActiveStep }) => {
   }, []);
 
   return (
-    <div className="mb-8">
+    <div className="mb-0 md:mb-8">
       {/* Mobile dropdown */}
       {isMobile && (
         <div className="relative w-full">
@@ -24,7 +25,7 @@ const ProgressNavigator = ({ activeStep, setActiveStep }) => {
             className="w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-black dark:text-white px-4 py-2 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none"
           >
             {steps.map((step, index) => (
-              <option key={index} value={index}>
+              <option key={index} value={index} disabled={index > activeStep}>
                 {step.label}
               </option>
             ))}

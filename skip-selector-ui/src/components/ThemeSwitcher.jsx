@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { ThemeContext } from '@/pages/_app';
 import { Sun, Moon } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 // ThemeSwitcher component to toggle between light and dark themes
 const ThemeSwitcher = () => {

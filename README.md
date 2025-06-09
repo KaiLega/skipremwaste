@@ -88,3 +88,8 @@ All images are loaded dynamically based on the skip size to avoid hardcoding URL
 - Refactored `SkipCard` and `SkipList` to share logic and handle step progression cleanly.
 - Enhanced `UI feedback` for skip selection with modals and scroll locking.
 - Extracted shared logic into utils/`skipHelpers`.js.
+
+### v1.5 – Enhanced mobile layout and added footer
+- Improved `mobile layout` and responsiveness
+- Added `footer` with light/dark mode support
+- Minor `UI refinements` for consistency

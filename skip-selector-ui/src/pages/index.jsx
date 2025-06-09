@@ -72,7 +72,7 @@ const HomePage = () => {
 
   return ( 
     <main
-      className={`min-h-screen px-4 py-12 text-black dark:text-white ${
+      className={`min-h-screen px-4 pt-12 md:pt-10 text-black dark:text-white ${
         theme === 'dark'
           ? 'bg-[#111827]'
           : 'bg-gradient-to-b from-gray-50 to-white'
@@ -86,13 +86,33 @@ const HomePage = () => {
         onUpdate={(newConfig) => setConfig(prev => ({ ...prev, ...newConfig }))}
       />
 
-      {/* Menu Icon */}
-      <MenuButton onClick={() => setMenuOpen(true)} visible={!menuOpen} />
+      {/* Menu Icon mobile */}
+      {!menuOpen && (
+        <div className="md:hidden fixed top-0 left-0 w-full bg-gray-50 dark:bg-[#111827] z-50 p-2 flex items-center justify-between shadow-sm">
+          {/* Menu icon on the left */}
+          <div className="ml-2">
+            <MenuButton onClick={() => setMenuOpen(true)} />
+          </div>
+
+          {/* ProgressNavigator centered */}
+          <div className="flex-1 flex justify-center">
+            <ProgressNavigator activeStep={activeStep} setActiveStep={setActiveStep} />
+          </div>
+
+          {/* Empty space to balance layout */}
+          <div className="w-10" />
+        </div>
+      )}
+
+      {/* Menu Icon desktop */}
+      <div className="hidden md:block fixed top-19 left-10 z-50">
+        <MenuButton onClick={() => setMenuOpen(true)} visible={!menuOpen} />
+      </div>
 
       {/* Main content */}
       <LayoutContainer>
         {/* ProgressNavigator */}
-        <div className="mt-4">
+        <div className="mt-4 hidden md:block">
           <ProgressNavigator activeStep={activeStep} setActiveStep={setActiveStep} />
         </div>
         {activeStep === 2 ? (
@@ -100,7 +120,7 @@ const HomePage = () => {
         {/* Title */}
         <section className="max-w-3xl mx-auto text-center py-10">
           <h1 className="text-4xl font-bold mb-2">Find Your Perfect Skip</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 md:mb-6">
             Choose the right skip that best suits your needs.
           </p>
         </section>

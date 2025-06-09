@@ -26,8 +26,8 @@ const SideMenu = ({ isOpen, onClose, config, onUpdate }) => {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed top-0 left-0 h-full w-72 bg-white dark:bg-gray-900 p-6 z-50 shadow-lg"
-          >
+            className="fixed top-0 left-0 h-full w-full sm:w-72 bg-white dark:bg-gray-900 p-6 z-50 shadow-lg"
+            >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg font-semibold dark:text-white">Settings</h2>
               <button onClick={onClose} className="text-gray-700 dark:text-gray-300" aria-label="Close settings menu">

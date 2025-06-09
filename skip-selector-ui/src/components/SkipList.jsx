@@ -1,4 +1,3 @@
-// src/components/SkipList.jsx
 import React from 'react';
 import SkipCard from './SkipCard';
 
