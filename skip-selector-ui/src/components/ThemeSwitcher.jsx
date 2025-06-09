@@ -2,6 +2,7 @@ import { useTheme } from 'next-themes';
 import { Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+// ThemeSwitcher component to toggle between light and dark themes
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);

@@ -62,8 +62,14 @@ All images are loaded dynamically based on the skip size to avoid hardcoding URL
 ## Changelog
 
 ### v1.1 – Modern UI & Feature Enhancements
-- Added **search bar** to filter skips by yard size.
-- Implemented **"scroll to top"** button on scroll.
-- Integrated **Framer Motion** for animated UI elements.
-- Introduced **dark/light mode** (light as default).
-- Improved **responsiveness** and cleaned component structure.
+- Added `search bar` to filter skips by yard size.
+- Implemented `scroll to top` button on scroll.
+- Integrated `Framer Motion` for animated UI elements.
+- Introduced `dark/light mode` (light as default).
+- Improved `responsiveness` and cleaned component structure.
+
+### v1.2 – Advanced UI Structure & Filtering
+- Introduced `FilterBar` with filtering options (size, price, hire period, road/heavy waste).
+- Added `ProgressNavigator` component to visually indicate current step.
+- Wrapped page in `LayoutContainer` for consistent spacing and structure.
+- Improved visual theming of progress separator for dark/light mode.
