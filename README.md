@@ -73,3 +73,18 @@ All images are loaded dynamically based on the skip size to avoid hardcoding URL
 - Added `ProgressNavigator` component to visually indicate current step.
 - Wrapped page in `LayoutContainer` for consistent spacing and structure.
 - Improved visual theming of progress separator for dark/light mode.
+
+### v1.3 – Custom Theme Handling & Menu Integration
+- Replaced next-themes with custom `ThemeContext` and localStorage-based dark mode support.
+- Added a `SideMenu` with Currency, VAT, Filters options.
+- Integrated `ThemeSwitcher` directly into the SideMenu for more intuitive toggling.
+- Improved `FilterBar` input styling for better visibility and dark mode contrast.
+- Fixed `theme state` persistence on page reloads and transitions.
+
+### v1.4 – Confirmation Modal & Component Refactoring
+- Added `ConfirmModal` to review skip selection before proceeding.
+- Updated `FilterBar` input behavior and appearance.
+- Improved `ProgressNavigator` with mobile dropdown and interactive step highlighting.
+- Refactored `SkipCard` and `SkipList` to share logic and handle step progression cleanly.
+- Enhanced `UI feedback` for skip selection with modals and scroll locking.
+- Extracted shared logic into utils/`skipHelpers`.js.

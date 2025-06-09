@@ -17,10 +17,12 @@ const FilterBar = ({ filters, onChange }) => {
           <label className="block text-sm font-medium mb-1">Min Size (yards)</label>
           <input
             type="number"
-            value={localFilters.minSize}
-            onChange={(e) => handleChange('minSize', parseInt(e.target.value))}
+            value={localFilters.minSize || ''}
+            onChange={(e) =>
+              handleChange('minSize', e.target.value === '' ? 0 : parseFloat(e.target.value))
+            }
             className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
-            />
+          />
         </div>
 
         {/* Price filter */}
@@ -28,8 +30,10 @@ const FilterBar = ({ filters, onChange }) => {
           <label className="block text-sm font-medium mb-1">Max Price (£)</label>
           <input
             type="number"
-            value={localFilters.maxPrice}
-            onChange={(e) => handleChange('maxPrice', parseInt(e.target.value))}
+            value={localFilters.maxPrice === Infinity ? '' : localFilters.maxPrice}
+            onChange={(e) =>
+              handleChange('maxPrice', e.target.value === '' ? Infinity : parseFloat(e.target.value))
+            }
             className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
           />
         </div>
@@ -39,7 +43,7 @@ const FilterBar = ({ filters, onChange }) => {
           <label className="block text-sm font-medium mb-1">Hire Period (days)</label>
           <select
             value={localFilters.hirePeriod}
-            onChange={(e) => handleChange('hirePeriod', parseInt(e.target.value))}
+            onChange={(e) => handleChange('hirePeriod', parseInt(e.target.value) || '')}
             className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
           >
             <option value="">Any</option>
@@ -49,7 +53,7 @@ const FilterBar = ({ filters, onChange }) => {
           </select>
         </div>
 
-        {/* Allowed on road */}
+        {/* Checkboxes */}
         <div className="col-span-1 md:col-span-3 flex items-center gap-4 mt-2">
           <label className="flex items-center gap-2">
             <input

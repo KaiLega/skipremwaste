@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
+import { ArrowUp } from 'lucide-react';
+
 import skipsData from '@/data/skips.json';
-import SkipList from '@/components/SkipList';
+
 import FilterBar from '@/components/FilterBar';
-import ProgressNavigator from '@/components/ProgressNavigator';
-import { ArrowUp, Menu } from 'lucide-react';
 import LayoutContainer from '@/components/LayoutContainer';
-import SideMenu from '@/components/SideMenu';
 import MenuButton from '@/components/MenuButton';
-import { useContext } from 'react';
+import ProgressNavigator from '@/components/ProgressNavigator';
+import SideMenu from '@/components/SideMenu';
+import SkipList from '@/components/SkipList';
+
 import { ThemeContext } from '@/pages/_app';
+import { steps } from '@/constants/steps';
 
 const HomePage = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  const [activeStep, setActiveStep] = useState(2);
   const [skips, setSkips] = useState(skipsData);
   const [query, setQuery] = useState('');
   const [showScroll, setShowScroll] = useState(false);
@@ -89,10 +93,11 @@ const HomePage = () => {
       <LayoutContainer>
         {/* ProgressNavigator */}
         <div className="mt-4">
-          <ProgressNavigator />
+          <ProgressNavigator activeStep={activeStep} setActiveStep={setActiveStep} />
         </div>
-
-        {/* Header + search + theme */}
+        {activeStep === 2 ? (
+        <>
+        {/* Title */}
         <section className="max-w-3xl mx-auto text-center py-10">
           <h1 className="text-4xl font-bold mb-2">Find Your Perfect Skip</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -110,7 +115,15 @@ const HomePage = () => {
           skips={filteredSkips}
           currency={config.currency}
           includeVat={config.includeVat}
+          setActiveStep={setActiveStep}
         />
+        </>
+      ) : (
+        // Placeholder for other pages
+        <div className="h-[60vh] flex items-center justify-center text-gray-400 text-sm italic">
+          Step "{steps[activeStep]?.label}" placeholder page
+        </div>
+      )}
       </LayoutContainer>
 
       {/* Scroll to top */}

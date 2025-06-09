@@ -22,7 +22,7 @@ const exchangeRates = {
 };
 
 // SkipList component with currency and VAT options
-const SkipList = ({ skips, currency = 'GBP', includeVat = true }) => {
+const SkipList = ({ skips, currency = 'GBP', includeVat = true, setActiveStep }) => {
   const symbol = getCurrencySymbol(currency);
   const rate = exchangeRates[currency] || 1;
 
@@ -43,6 +43,7 @@ const SkipList = ({ skips, currency = 'GBP', includeVat = true }) => {
             includeVat,
             currencySymbol: symbol,
           }}
+          setActiveStep={setActiveStep} 
         />
       ))}
     </div>
