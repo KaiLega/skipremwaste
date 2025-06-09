@@ -1,21 +1,11 @@
-import { useTheme } from 'next-themes';
+import { useContext } from 'react';
+import { ThemeContext } from '@/pages/_app';
 import { Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 // ThemeSwitcher component to toggle between light and dark themes
 const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <button

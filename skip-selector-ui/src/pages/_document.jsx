@@ -1,8 +1,21 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
+  const setInitialTheme = `
+    (function() {
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (_) {}
+    })();
+  `;
+
   return (
-    <Html lang="en">
+    <Html lang="en" suppressHydrationWarning>
       <Head>
         {/* Favicon */}
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -17,8 +30,10 @@ export default function Document() {
         <meta property="og:description" content="Select the perfect skip size for your project." />
         <meta property="og:image" content="/favicon/android-chrome-512x512.png" />
         <meta property="og:type" content="website" />
+        {/* 👇 Script to set theme before hydration */}
+        <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
       </Head>
-      <body className="bg-[#1C1C1C] text-white">
+      <body className="bg-white text-black dark:bg-[#1C1C1C] dark:text-white">
         <Main />
         <NextScript />
       </body>

@@ -3,19 +3,25 @@ import skipsData from '@/data/skips.json';
 import SkipList from '@/components/SkipList';
 import FilterBar from '@/components/FilterBar';
 import ProgressNavigator from '@/components/ProgressNavigator';
-import ThemeSwitcher from '@/components/ThemeSwitcher';
-import { ArrowUp } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
+import { ArrowUp, Menu } from 'lucide-react';
 import LayoutContainer from '@/components/LayoutContainer';
+import SideMenu from '@/components/SideMenu';
+import MenuButton from '@/components/MenuButton';
+import { useContext } from 'react';
+import { ThemeContext } from '@/pages/_app';
 
 const HomePage = () => {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   const [skips, setSkips] = useState(skipsData);
   const [query, setQuery] = useState('');
   const [showScroll, setShowScroll] = useState(false);
-
-  // State for advanced filters
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [config, setConfig] = useState({
+    currency: 'GBP',
+    includeVat: true,
+    filtersVisible: true,
+  });
   const [filters, setFilters] = useState({
     minSize: 0,
     maxPrice: Infinity,
@@ -30,6 +36,11 @@ const HomePage = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Handle theme change
+  const handleConfigUpdate = (newConfig) => {
+    setConfig(prev => ({ ...prev, ...newConfig }));
+  };  
 
   // Handle filters change
   const handleFiltersChange = (newFilters) => {
@@ -55,7 +66,7 @@ const HomePage = () => {
     );
   });
 
-  return (
+  return ( 
     <main
       className={`min-h-screen px-4 py-12 text-black dark:text-white ${
         theme === 'dark'
@@ -63,35 +74,43 @@ const HomePage = () => {
           : 'bg-gradient-to-b from-gray-50 to-white'
       }`}
     >
-       <LayoutContainer>
-        {/* Progress steps */}
-        <ProgressNavigator />
+      {/* Side Menu */}
+      <SideMenu
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        config={config}
+        onUpdate={(newConfig) => setConfig(prev => ({ ...prev, ...newConfig }))}
+      />
+
+      {/* Menu Icon */}
+      <MenuButton onClick={() => setMenuOpen(true)} visible={!menuOpen} />
+
+      {/* Main content */}
+      <LayoutContainer>
+        {/* ProgressNavigator */}
+        <div className="mt-4">
+          <ProgressNavigator />
+        </div>
 
         {/* Header + search + theme */}
-        <section className="max-w-3xl mx-auto text-center mb-10">
+        <section className="max-w-3xl mx-auto text-center py-10">
           <h1 className="text-4xl font-bold mb-2">Find Your Perfect Skip</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Choose the right skip that best suits your needs.
           </p>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by yard size..."
-            className="w-full md:w-1/2 px-4 py-2 rounded-md border dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
-          />
-
-          {/* Theme switcher */}
-          <div className="mt-4 flex justify-center">
-            <ThemeSwitcher />
-          </div>
         </section>
 
-        {/* Filter bar con props */}
-        <FilterBar filters={filters} onChange={handleFiltersChange} />
+        {/* Conditionally render FilterBar */}
+        {config.filtersVisible && (
+          <FilterBar filters={filters} onChange={handleFiltersChange} />
+        )}
 
-        {/* Lista degli skip */}
-        <SkipList skips={filteredSkips} />
+        {/* Skip List */}
+        <SkipList
+          skips={filteredSkips}
+          currency={config.currency}
+          includeVat={config.includeVat}
+        />
       </LayoutContainer>
 
       {/* Scroll to top */}

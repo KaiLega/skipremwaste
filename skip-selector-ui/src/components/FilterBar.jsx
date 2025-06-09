@@ -19,8 +19,8 @@ const FilterBar = ({ filters, onChange }) => {
             type="number"
             value={localFilters.minSize}
             onChange={(e) => handleChange('minSize', parseInt(e.target.value))}
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded"
-          />
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
+            />
         </div>
 
         {/* Price filter */}
@@ -30,7 +30,7 @@ const FilterBar = ({ filters, onChange }) => {
             type="number"
             value={localFilters.maxPrice}
             onChange={(e) => handleChange('maxPrice', parseInt(e.target.value))}
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded"
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
           />
         </div>
 
@@ -40,7 +40,7 @@ const FilterBar = ({ filters, onChange }) => {
           <select
             value={localFilters.hirePeriod}
             onChange={(e) => handleChange('hirePeriod', parseInt(e.target.value))}
-            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded"
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white text-black dark:bg-white/10 dark:text-white placeholder:text-gray-400"
           >
             <option value="">Any</option>
             <option value={7}>7 days</option>
