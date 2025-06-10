@@ -18,7 +18,22 @@ The goal was to redesign and modernize the skip selection page using a modular, 
 - **Data**: Data is sourced from a local mock file `data/skips.json` for simplicity.
 - **Images**: Skip images are loaded dynamically from Supabase Storage based on the skip size.
 - **Alias Imports**: Configured `@` as a base alias for cleaner imports (`@/components/...`).
-
+- **State Management**: Local state is managed using React's built-in `useState` and `useContext` hooks, with a custom `ThemeContext` for theme handling.
+- **API Integration**: While the current version uses mock data, the architecture is designed to easily integrate with RESTful APIs or GraphQL endpoints.
+- **Testing**: Basic unit tests are implemented using Jest and React Testing Library to ensure component reliability.
+- **Performance Optimization**: Implemented lazy loading for images and dynamic imports for components to improve initial load time.
+- **Accessibility**: Followed best practices for accessibility, including semantic HTML, ARIA roles, and keyboard navigation support.
+- **Component Structure**:
+  - `ConfirmModal.jsx`: Displays a confirmation modal for user actions.
+  - `FilterBar.jsx`: Provides filtering options for the skip list.
+  - `Footer.jsx`: Renders the footer section of the application.
+  - `LayoutContainer.jsx`: Wraps the main content with consistent layout styling.
+  - `MenuButton.jsx`: A button to toggle the side menu.
+  - `ProgressNavigator.jsx`: Displays the progress of steps in the skip selection process.
+  - `SideMenu.jsx`: A side menu for configuration and navigation options.
+  - `SkipCard.jsx`: Displays a single skip item with image, price, and options.
+  - `SkipList.jsx`: Maps the skip list into individual `SkipCard` components.
+  - `ThemeSwitcher.jsx`: Toggles between light and dark themes.
 ---
 
 ## Tech Stack
@@ -31,13 +46,29 @@ The goal was to redesign and modernize the skip selection page using a modular, 
 
 ---
 
-## ▶️ Running the Project
+## Running the Project
 
+### Development
 ```bash
 cd skip-selector-ui
 npm install
 npm run dev
 ```
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
+
+Or access the sandbox version directly at:  
+[https://p4td3t-3000.csb.app](https://p4td3t-3000.csb.app)
+
+### Production
+```bash
+npm run build
+npm start
+```
+
+### Prerequisites
+- Node.js v16+ (recommended)
+- npm v7+
+
 Then open http://localhost:3000 in your browser.
 
 ---
@@ -93,3 +124,11 @@ All images are loaded dynamically based on the skip size to avoid hardcoding URL
 - Improved `mobile layout` and responsiveness
 - Added `footer` with light/dark mode support
 - Minor `UI refinements` for consistency
+
+### v1.6 – Readme updates
+- Added detailed descriptions for all reusable components in the **Component Structure** section.
+- Updated the **Running the Project** section with the sandbox link: [https://p4td3t-3000.csb.app](https://p4td3t-3000.csb.app).
+- Improved the **Tech Stack** section to include all relevant technologies.
+- Enhanced the **Structure** section with a directory tree for better clarity.
+- Added notes about dynamic image loading and alias imports.
+- Verified and aligned README content with the actual implementation in the project.
